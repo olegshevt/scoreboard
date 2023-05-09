@@ -51,4 +51,38 @@ describe('LiveFootballWorldCupScoreboard', () => {
       expect(scoreboard.games).toHaveLength(0);
     });
   });
+
+  describe('getGamesInProgress', () => {
+    it('should return games in progress ordered by their total score', () => {
+      scoreboard.startGame('Mexico', 'Canada');
+      scoreboard.startGame('Spain', 'Brazil');
+      scoreboard.startGame('Germany', 'France');
+      scoreboard.startGame('Uruguay', 'Italy');
+      scoreboard.startGame('Argentina', 'Australia');
+  
+      scoreboard.updateScore(scoreboard.games[0], 0, 5);
+      scoreboard.updateScore(scoreboard.games[1], 10, 2);
+      scoreboard.updateScore(scoreboard.games[2], 2, 2);
+      scoreboard.updateScore(scoreboard.games[3], 6, 6);
+      scoreboard.updateScore(scoreboard.games[4], 3, 1);
+  
+      const summary = scoreboard.getGamesInProgress();
+      expect(summary).toHaveLength(5);
+      expect(summary[0].totalScore).toBe(12);
+      expect(summary[0].homeTeam).toBe('Spain');
+      expect(summary[0].awayTeam).toBe('Brazil');
+      expect(summary[1].totalScore).toBe(11);
+      expect(summary[1].homeTeam).toBe('Uruguay');
+      expect(summary[1].awayTeam).toBe('Italy');
+      expect(summary[2].totalScore).toBe(5);
+      expect(summary[2].homeTeam).toBe('Mexico');
+      expect(summary[2].awayTeam).toBe('Canada');
+      expect(summary[3].totalScore).toBe(4);
+      expect(summary[3].homeTeam).toBe('Argentina');
+      expect(summary[3].awayTeam).toBe('Australia');
+      expect(summary[4].totalScore).toBe(4);
+      expect(summary[4].homeTeam).toBe('Germany');
+      expect(summary[4].awayTeam).toBe('France');
+    });
+  });
 })
