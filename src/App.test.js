@@ -38,4 +38,17 @@ describe('LiveFootballWorldCupScoreboard', () => {
       expect(game.awayScore).toBe(1);
     });
   });
+
+  describe('finishGame', () => {
+    let game;
+
+    beforeEach(() => {
+      game = scoreboard.startGame('Home Team', 'Away Team');
+    });
+
+    it('should remove a game from the scoreboard', () => {
+      scoreboard.finishGame(game);
+      expect(scoreboard.games).toHaveLength(0);
+    });
+  });
 })
