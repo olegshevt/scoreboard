@@ -15,6 +15,11 @@ class App {
     return game;
   }
 
+  updateScore(game, homeScore, awayScore) {
+    game.homeScore = homeScore;
+    game.awayScore = awayScore;
+  }
+
 }
 
 
