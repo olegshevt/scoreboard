@@ -20,6 +20,13 @@ class App {
     game.awayScore = awayScore;
   }
 
+  finishGame(game) {
+    const index = this.games.indexOf(game);
+    if (index !== -1) {
+      this.games.splice(index, 1);
+    }
+  }
+
 }
 
 
