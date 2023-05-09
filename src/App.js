@@ -27,6 +27,23 @@ class App {
     }
   }
 
+  getGamesInProgress() {
+    return this.games
+      .map(game => ({
+        homeTeam: game.homeTeam,
+        awayTeam: game.awayTeam,
+        totalScore: game.homeScore + game.awayScore,
+        startTime: game.startTime
+      }))
+      .sort((a, b) => {
+        if (a.totalScore !== b.totalScore) {
+          return b.totalScore - a.totalScore;
+        } else {
+          return b.startTime - a.startTime;
+        }
+      });
+  }
+
 }
 
 
