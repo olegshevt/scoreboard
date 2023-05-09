@@ -1,70 +1,65 @@
-# Getting Started with Create React App
+# Live Football World Cup Scoreboard
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A library for managing live football matches and their scores in a World Cup.
 
-## Available Scripts
+## Installation
 
-In the project directory, you can run:
+This library can be installed via npm:
 
-### `npm start`
+```js
+npm install football-app
+```
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Usage
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+First, import the library:
 
-### `npm test`
+```js
+import App from 'App'
+```
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Then, create an instance of the Scoreboard:
 
-### `npm run build`
+```js
+const scoreboard = new Scoreboard()
+```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Starting a new game
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+To start a new game, call the startGame method and pass the names of the home team and the away team:
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+```js
+scoreboard.startGame('Mexico', 'Canada')
+```
 
-### `npm run eject`
+## Updating the score of a game
+To update the score of a game, call the updateScore method and pass the game object as well as the scores of the home team and the away team:
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+```js
+const game = scoreboard.startGame('Mexico', 'Canada')
+scoreboard.updateScore(game, 0, 5)
+```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+## Finishing a game
+To finish a game, call the finishGame method and pass the game object:
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+```js
+const game = scoreboard.startGame('Mexico', 'Canada');
+scoreboard.finishGame(game);
+```
 
-## Learn More
+## Getting the summary of games in progress
+To get the summary of games in progress ordered by their total score, call the getGamesInProgress method:
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+```js
+const gamesInProgress = scoreboard.getGamesInProgress();
+```
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+The gamesInProgress array will contain game objects sorted by their total score. If multiple games have the same total score, they will be sorted by the most recently started game.
 
-### Code Splitting
+## Assumptions
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+-   The library is designed to manage live football matches in a World Cup format. It does not support other formats or sports.
+-   The library is designed to be used in a single-threaded environment. It does not support concurrent access to the scoreboard or its games.
+-   The library is designed to be used as an in-memory store solution only. It does not support persistence of data between sessions.
