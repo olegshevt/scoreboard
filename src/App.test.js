@@ -24,4 +24,18 @@ describe('LiveFootballWorldCupScoreboard', () => {
     });
 
   });
+
+  describe('updateScore', () => {
+    let game;
+
+    beforeEach(() => {
+      game = scoreboard.startGame('Home Team', 'Away Team');
+    });
+
+    it('should update the score of a game', () => {
+      scoreboard.updateScore(game, 2, 1);
+      expect(game.homeScore).toBe(2);
+      expect(game.awayScore).toBe(1);
+    });
+  });
 })
